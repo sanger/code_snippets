@@ -17,7 +17,7 @@
 #
 # = Requirements and assumptions
 #
-# - Assumes wells labeled by row (A,B,C...) and column (1,2,3) in the format
+# - Assumes wells labelled by row (A,B,C...) and column (1,2,3) in the format
 #   A1, B1 etc.
 # - Assumes wells laid out in column order
 # - Supports 96 well and 384 well plates
