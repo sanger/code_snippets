@@ -1,0 +1,27 @@
+name: Assign Issue Number
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign-issue-number:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Set issue prefix
+        run: echo "ISSUE_PREFIX=Y$(date +'%y')" >> $GITHUB_ENV
+
+      - name: Assign custom issue number
+        uses: SHIV5T3R/Issuer@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_GEN: ${{ secrets.ISSUE_GEN }}
+          ISSUE_PREFIX: ${{ env.ISSUE_PREFIX }}
+          ISSUE_COUNTER: ${{ vars.ISSUE_NUMBER }}
+          ISSUE_COUNTER_VAR: "ISSUE_NUMBER"
+          ORG_NAME: "sanger"
