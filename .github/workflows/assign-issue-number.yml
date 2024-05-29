@@ -26,7 +26,7 @@ jobs:
       - name: Assign custom issue number
         uses: SHIV5T3R/Issuer@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
           ISSUE_GEN: ${{ steps.get_workflow_token.outputs.token }}
           ISSUE_PREFIX: ${{ env.ISSUE_PREFIX }}
           ISSUE_COUNTER: ${{ vars.ISSUE_NUMBER }}
