@@ -5,29 +5,8 @@ on:
     types: [opened]
 
 jobs:
-  assign-issue-number:
-    permissions: write-all
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout this repository
-        uses: actions/checkout@v2
-
-      - name: Set issue prefix
-        run: echo "ISSUE_PREFIX=TEST$(date +'%y')" >> $GITHUB_ENV
-
-      - name: Get Token
-        id: get_workflow_token
-        uses: peter-murray/workflow-application-token-action@v3
-        with:
-          application_id: ${{ secrets.ISSUE_GEN_APP_ID }}
-          application_private_key: ${{ secrets.ISSUE_GEN_APP_KEY }}
-
-      - name: Assign custom issue number
-        uses: SHIV5T3R/Issuer@main
-        with:
-          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
-          ISSUE_PREFIX: ${{ env.ISSUE_PREFIX }}
-          ISSUE_COUNTER: ${{ vars.ISSUE_NUMBER }}
-          ISSUE_COUNTER_VAR: "ISSUE_NUMBER"
-          ORG_NAME: "sanger"
+  call-add-to-project:
+    uses: sanger/.github/.github/workflows/generate-issue-number..yml@master
+    secrets:
+      app_id: ${{ secrets.ISSUE_GEN_APP_ID }}
+      app_key: ${{ secrets.ISSUE_GEN_APP_KEY }}
